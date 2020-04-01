@@ -1,0 +1,34 @@
+﻿@model Movies.Web.Models.Movies.SearchResults
+
+@using System.Collections.Generic;
+@using Movies.Web.Models.Movies;
+
+@{
+    ViewData["Title"] = "Movies List";
+}  
+
+        <form method="get" asp-controller="Movies" asp-action="Index">
+            <p>
+                <label class="control-label" for="t">Title:</label>
+                <input type="text" id="s" name="s" class="input-small">
+                &nbsp;&nbsp;
+                <label class="control-label" for="y">Year:</label>
+                <input type="text" id="y" name="y" class="input-small" style="width: 100px;">
+                &nbsp;&nbsp;
+                <input type="submit" class="btn-sm btn-primary" value="Filter" />
+                <input type="reset" class="btn-sm" value="Reset" />
+            </p>
+        </form>
+
+        <section class="movies" id="movies">
+            <h2>@ViewData["Title"]</h2>
+            <div class="row">
+                @if (Model.Results != null)
+                {
+                    @foreach (var movie in Model.Results)
+                    {
+                        <partial name="MovieResult" model="movie" />
+                    }
+                }
+            </div>
+        </section>
